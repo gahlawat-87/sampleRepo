@@ -8,20 +8,26 @@ on:
   workflow_dispatch:
     # Inputs the workflow accepts.
     inputs:
-      name:
+      Environment:
         # Friendly description to be shown in the UI instead of 'name'
-        description: 'Environement '
+        description: 'Environment '
         # Default value if no value is explicitly provided
         default: 'QA'
         # Input has to be provided for the workflow to run
         required: true
         # The data type of the input
         type: string
+      Suite:
+        description:  'Select Suite which needs to be executed'
+        default:  'Sanity'
+        required: true
+        type: string
+         
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "greet"
-  greet:
+  build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -29,4 +35,4 @@ jobs:
     steps:
     # Runs a single command using the runners shell
     - name: Send greeting
-      run: echo "Hello ${{ inputs.name }}"
+      run: echo "executing ${{ inputs.Suite }} on ${{ inputs.Environment }} "
